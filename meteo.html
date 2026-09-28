@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Live Quebec Weather — Météo for Montréal, Québec City, Tremblant & More | Vrai Québec</title>
+<meta name="description" content="Live weather and 7-day forecasts for six Quebec destinations: Montréal, Québec City, Mont-Tremblant, Charlevoix, Percé and Saguenay. Plan your trip around the sky.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,500;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4276130467303652" crossorigin="anonymous"></script>
+<style>
+.wx-status{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:16px 22px;margin-bottom:26px;font-size:.92rem;color:var(--muted)}
+.wx-status.error{color:#8a2f23;border-color:#d8a08a;background:#fbf1ea}
+.wx-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px}
+.wx-card{background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:0 10px 30px rgba(30,51,37,.08)}
+.wx-head{display:flex;align-items:baseline;justify-content:space-between;background:var(--forest);color:var(--ivory);padding:14px 20px}
+.wx-head h3{font-family:var(--serif);font-size:1.25rem;margin:0;color:var(--ivory)}
+.wx-head time{font-size:.72rem;letter-spacing:1px;text-transform:uppercase;color:var(--gold-soft)}
+.wx-now{display:flex;align-items:center;gap:16px;padding:20px 20px 6px}
+.wx-icon{width:64px;height:64px;flex:0 0 64px;color:var(--gold)}
+.wx-icon svg{width:100%;height:100%}
+.wx-temp{font-family:var(--serif);font-weight:800;font-size:2.9rem;line-height:1;color:var(--ink)}
+.wx-cond{font-size:.85rem;font-weight:600;color:var(--forest);text-transform:uppercase;letter-spacing:1px;margin-top:4px}
+.wx-meta{list-style:none;display:flex;flex-wrap:wrap;gap:8px 18px;padding:10px 20px 16px;margin:0;font-size:.83rem;color:var(--ink2)}
+.wx-meta b{color:var(--forest)}
+.wx-days{display:grid;grid-template-columns:repeat(7,1fr);border-top:1px solid var(--line);background:var(--paper)}
+.wx-day{padding:10px 4px;text-align:center;border-right:1px solid var(--line);font-size:.72rem}
+.wx-day:last-child{border-right:0}
+.wx-day.today{background:var(--gold-pale)}
+.wx-day .d{display:block;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--forest);margin-bottom:6px}
+.wx-day .ic{width:26px;height:26px;margin:0 auto 4px;color:var(--forest-soft)}
+.wx-day .ic svg{width:100%;height:100%}
+.wx-day .hi{display:block;font-weight:700;color:var(--ink)}
+.wx-day .lo{display:block;color:var(--muted)}
+.wx-day .pp{display:block;color:#2f6f8f;margin-top:2px}
+.wx-credit{margin-top:26px;font-size:.8rem;color:var(--muted);text-align:center}
+@media(max-width:560px){.wx-temp{font-size:2.3rem}.wx-day{font-size:.64rem}}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="index.html"><span class="brand-mark">VQ</span><span class="brand-text">Vrai <em>Québec</em></span></a>
+    <button class="menu-toggle" aria-label="Menu" onclick="document.getElementById('mainNav').classList.toggle('open')">☰</button>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html">Home</a>
+      <div class="dropdown">
+        <button class="dropbtn">Regions ▾</button>
+        <div class="dropdown-menu">
+          <a href="regions/laurentides.html">The Laurentians<small>Mont-Tremblant, Saint-Sauveur, fall colours</small></a>
+          <a href="regions/eastern-townships.html">Eastern Townships<small>Magog, Mont-Orford, wine route</small></a>
+          <a href="regions/charlevoix.html">Charlevoix<small>Baie-Saint-Paul, Hautes-Gorges, Le Massif</small></a>
+          <a href="regions/gaspesie.html">Gaspésie<small>Percé, Route 132, national parks</small></a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">Road Trips ▾</button>
+        <div class="dropdown-menu">
+          <a href="road-trips/gaspesie-loop.html">Tour de la Gaspésie<small>The full Route 132 loop, 5–7 days</small></a>
+          <a href="road-trips/laurentians-weekend.html">Laurentians Weekend<small>2–3 days from Montreal</small></a>
+        </div>
+      </div>
+      <a href="outdoors.html">Outdoors</a>
+      <div class="dropdown">
+        <button class="dropbtn">Adventure ▾</button>
+        <div class="dropdown-menu">
+          <a href="aventure/index.html">Adventure Hub<small>Hikes, ski hills & waterfalls</small></a>
+          <a href="aventure/randonnee.html">Best Hikes<small>10 trails worth the climb</small></a>
+          <a href="aventure/ski.html">Ski Hills<small>Resorts from Tremblant to the Massif</small></a>
+          <a href="aventure/cascades.html">Waterfalls<small>Quebec's great falls</small></a>
+        </div>
+      </div>
+      <a href="meteo.html">Météo</a>
+      <a href="about.html">About</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="page-hero">
+    <div class="container">
+      <div class="hero-kicker">Plan around the sky</div>
+      <h1>Météo</h1>
+      <p>Live conditions and 7-day forecasts for six Quebec destinations — from Montréal's streets to Percé's cliffs. Refreshes automatically every 30 minutes.</p>
+    </div>
+  </div>
+
+  <section>
+    <div class="container">
+      <div id="wx-status" class="wx-status">Loading live weather…</div>
+      <div id="wx-grid" class="wx-grid" aria-live="polite"></div>
+      <p class="wx-credit">Live data · <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> · <span id="wx-updated"></span> · Auto-refreshes every 30 minutes</p>
+
+      <div class="factbox" style="margin-top:40px">
+        <h3>Reading Quebec weather like a local</h3>
+        <ul>
+          <li><strong>Wind is the story.</strong> On the St. Lawrence — Charlevoix, Percé, the Gaspé coast — wind chill and gusts matter more than the thermometer says.</li>
+          <li><strong>Ski season runs late.</strong> Tremblant and the Laurentians often ski into April; check snowfall, not just temperature.</li>
+          <li><strong>Summer storms build fast.</strong> A 40% precipitation chance in July usually means a short afternoon thunderstorm, not a ruined day.</li>
+          <li><strong>Fall colours peak early up north.</strong> Saguenay and Charlevoix turn two to three weeks before Montréal — late September is the sweet spot.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">Vrai Québec</div>
+        <p>An independent travel guide to Quebec's regions, road trips and outdoors. Written by Quebecers, for travelers.</p>
+      </div>
+      <div>
+        <h4>Regions</h4>
+        <ul>
+          <li><a href="regions/laurentides.html">The Laurentians</a></li>
+          <li><a href="regions/eastern-townships.html">Eastern Townships</a></li>
+          <li><a href="regions/charlevoix.html">Charlevoix</a></li>
+          <li><a href="regions/gaspesie.html">Gaspésie</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Guide</h4>
+        <ul>
+          <li><a href="road-trips/gaspesie-loop.html">Tour de la Gaspésie</a></li>
+          <li><a href="road-trips/laurentians-weekend.html">Laurentians Weekend</a></li>
+          <li><a href="outdoors.html">Outdoors</a></li>
+          <li><a href="aventure/index.html">Adventure</a></li>
+          <li><a href="meteo.html">Météo — live weather</a></li>
+          <li><a href="meteo.html">Météo — live weather</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Vrai Québec. All rights reserved.</span>
+      <span><a href="about.html">About</a> · <a href="privacy.html">Privacy</a> · <a href="mailto:info@montrealguide.ca">info@montrealguide.ca</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('.dropdown > .dropbtn').forEach(function(b){
+  b.addEventListener('click',function(e){e.preventDefault();b.parentElement.classList.toggle('open');});
+});
+</script>
+
+<script>
+(function(){
+  var LOCS=[
+    {name:"Montréal",lat:45.50,lon:-73.57},
+    {name:"Québec City",lat:46.81,lon:-71.21},
+    {name:"Mont-Tremblant",lat:46.21,lon:-74.59},
+    {name:"Charlevoix · La Malbaie",lat:47.66,lon:-70.15},
+    {name:"Percé",lat:48.52,lon:-64.21},
+    {name:"Saguenay",lat:48.43,lon:-71.07}
+  ];
+
+  var ICONS={
+    sun:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.4M12 19.1v2.4M2.5 12h2.4M19.1 12h2.4M5 5l1.7 1.7M17.3 17.3L19 19M19 5l-1.7 1.7M6.7 17.3L5 19"/></svg>',
+    part:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.5" cy="8.5" r="3.4"/><path d="M8.5 2.8v1.8M3 8.5h1.8M4.6 4.6l1.3 1.3M12.4 4.6l-1.3 1.3"/><path d="M9 20h9.5a3.5 3.5 0 0 0 .6-6.95A5.5 5.5 0 0 0 8.4 14.6 3 3 0 0 0 9 20z"/></svg>',
+    cloud:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 19h10a4 4 0 0 0 .8-7.92A6.5 6.5 0 0 0 5.2 12.6 3.5 3.5 0 0 0 7 19z"/></svg>',
+    fog:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 14h10a3.5 3.5 0 0 0 .7-6.93A5.5 5.5 0 0 0 7.4 8.4 3 3 0 0 0 7 14z"/><path d="M4 17.5h16M6 20.5h12"/></svg>',
+    rain:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 15h10a3.5 3.5 0 0 0 .7-6.93A5.5 5.5 0 0 0 7.4 9.4 3 3 0 0 0 7 15z"/><path d="M8 18l-1 2.5M12.5 18l-1 2.5M17 18l-1 2.5"/></svg>',
+    snow:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 14h10a3.5 3.5 0 0 0 .7-6.93A5.5 5.5 0 0 0 7.4 8.4 3 3 0 0 0 7 14z"/><path d="M8 17.5v3M6.7 19h2.6M12 17.5v3M10.7 19h2.6M16 17.5v3M14.7 19h2.6"/></svg>',
+    storm:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 14h10a3.5 3.5 0 0 0 .7-6.93A5.5 5.5 0 0 0 7.4 8.4 3 3 0 0 0 7 14z"/><path d="M12.5 14l-2.5 5h4l-2.5 5"/></svg>'
+  };
+
+  function cond(code){
+    if(code===0)return["Clear sky","sun"];
+    if(code===1)return["Mainly clear","sun"];
+    if(code===2)return["Partly cloudy","part"];
+    if(code===3)return["Overcast","cloud"];
+    if(code===45||code===48)return["Fog","fog"];
+    if(code===51||code===53||code===55||code===56||code===57)return["Drizzle","rain"];
+    if(code===61||code===63||code===65||code===66||code===67||code===80||code===81||code===82)return["Rain","rain"];
+    if(code===71||code===73||code===75||code===77||code===85||code===86)return["Snow","snow"];
+    if(code===95||code===96||code===99)return["Thunderstorm","storm"];
+    return["—","cloud"];
+  }
+
+  function dayName(iso){
+    return new Date(iso+"T12:00:00").toLocaleDateString("en-US",{weekday:"short"});
+  }
+
+  function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;");}
+
+  function render(data){
+    var grid=document.getElementById("wx-grid");
+    var html="";
+    data.forEach(function(w,i){
+      var loc=LOCS[i], c=w.current, d=w.daily;
+      var hr=(c.time||"").slice(0,13), pp=null;
+      if(w.hourly&&w.hourly.time){
+        for(var k=0;k<w.hourly.time.length;k++){
+          if(w.hourly.time[k].slice(0,13)===hr){pp=w.hourly.precipitation_probability[k];break;}
+        }
+      }
+      var cc=cond(c.weather_code);
+      var days="";
+      for(var j=0;j<7;j++){
+        var dc=cond(d.weather_code[j]);
+        days+='<div class="wx-day'+(j===0?" today":"")+'">'+
+          '<span class="d">'+(j===0?"Now":dayName(d.time[j]))+'</span>'+
+          '<span class="ic">'+ICONS[dc[1]]+'</span>'+
+          '<span class="hi">'+Math.round(d.temperature_2m_max[j])+'°</span>'+
+          '<span class="lo">'+Math.round(d.temperature_2m_min[j])+'°</span>'+
+          '<span class="pp">'+(d.precipitation_probability_max[j]==null?"–":d.precipitation_probability_max[j]+"%")+'</span></div>';
+      }
+      html+='<article class="wx-card">'+
+        '<div class="wx-head"><h3>'+esc(loc.name)+'</h3><time>Now</time></div>'+
+        '<div class="wx-now"><div class="wx-icon">'+ICONS[cc[1]]+'</div>'+
+        '<div><div class="wx-temp">'+Math.round(c.temperature_2m)+'°</div>'+
+        '<div class="wx-cond">'+cc[0]+'</div></div></div>'+
+        '<ul class="wx-meta">'+
+        '<li>Feels like <b>'+Math.round(c.apparent_temperature)+'°</b></li>'+
+        '<li>Wind <b>'+Math.round(c.wind_speed_10m)+' km/h</b></li>'+
+        '<li>Precip <b>'+(pp==null?"–":pp+"%")+'</b></li>'+
+        '<li>Humidity <b>'+c.relative_humidity_2m+'%</b></li></ul>'+
+        '<div class="wx-days">'+days+'</div></article>';
+    });
+    grid.innerHTML=html;
+    var t=new Date(data[0].current.time);
+    document.getElementById("wx-updated").textContent="Updated "+t.toLocaleDateString("en-US",{month:"short",day:"numeric"})+", "+t.toLocaleTimeString("en-US",{hour:"numeric",minute:"2-digit"});
+    document.getElementById("wx-status").style.display="none";
+  }
+
+  function fail(){
+    var s=document.getElementById("wx-status");
+    s.className="wx-status error";
+    s.textContent="Live weather is unavailable right now — please check back shortly.";
+    document.getElementById("wx-grid").innerHTML="";
+  }
+
+  function load(){
+    var q="latitude="+LOCS.map(function(l){return l.lat;}).join(",")+
+          "&longitude="+LOCS.map(function(l){return l.lon;}).join(",")+
+          "&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m"+
+          "&hourly=precipitation_probability"+
+          "&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max"+
+          "&timezone=America%2FToronto&forecast_days=7";
+    fetch("https://api.open-meteo.com/v1/forecast?"+q)
+      .then(function(r){if(!r.ok)throw new Error("bad status");return r.json();})
+      .then(function(j){
+        var arr=Array.isArray(j)?j:[j];
+        if(arr.length!==LOCS.length||!arr[0].current)throw new Error("bad payload");
+        render(arr);
+      })
+      .catch(fail);
+  }
+
+  load();
+  setInterval(load,30*60*1000);
+})();
+</script>
+</body>
+</html>
