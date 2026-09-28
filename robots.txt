@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://brandonlacoste9-tech.github.io/vraiquebec/sitemap.xml
